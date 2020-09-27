@@ -1,0 +1,40 @@
+.chat {
+    padding: 40px;
+    height: 700px;
+    background-image: url("https://preview.redd.it/qwd83nc4xxf41.jpg?width=640&crop=smart&auto=webp&s=e82767fdf47158e80604f407ce4938e44afc6c25");
+  }
+  .chat__input {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 80px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .chat__input--textbox {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 45px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .chat__input--textbox > input {
+    border: none;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 4px;
+  }
+  .chat__input--textbox > input:focus {
+    border: none;
+    outline: none;
+  }
+  .chat__input--sendBtn {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+  }
+  
