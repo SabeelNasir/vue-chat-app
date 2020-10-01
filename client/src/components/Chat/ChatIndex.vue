@@ -62,6 +62,7 @@ export default {
         JSON.stringify({
           username: this.$store.state.auth.username,
           message: this.message,
+          sendTo: "Ali",
         })
       );
       this.message = "";
