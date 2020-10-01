@@ -3,11 +3,13 @@ const uuid = require('uuid');
 module.exports = (app) => {
     app.post('/login', function (req, res) {
         const id = uuid.v4();
-        console.log(`Updating session for user ${id}`);
+        console.log(req.body);
         req.session.userId = id;
         res.send({
             result: 'OK', message: 'Session updated', data: {
-                userId: id
+                userId: id,
+                username: req.body.username,
+                token: id
             }
         });
     });

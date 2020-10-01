@@ -5,7 +5,7 @@ const clients = new Clients();
 const map = new Map();
 
 module.exports = (server, sessionParser) => {
-    
+
     const wss = new WebSocket.Server({ clientTracking: true, noServer: true });
 
     server.on('upgrade', function (request, socket, head) {
@@ -25,13 +25,13 @@ module.exports = (server, sessionParser) => {
     });
 
     wss.on('connection', function (ws, request) {
+        ws.isAlive = true
         const userId = request.session.userId;
         map.set(userId, ws);
         ws.on('message', function (message) {
             console.log(message)
             const msgBody = JSON.parse(message)
             clients.saveClient(msgBody.username, ws)
-            console.log(`Received message ${msgBody.message} from user ${userId}`);
             if (msgBody.sendTo == null) {
                 wss.clients.forEach(function each(client) {
                     if (client != ws && client.readyState === WebSocket.OPEN) {
@@ -57,6 +57,27 @@ module.exports = (server, sessionParser) => {
         ws.on('close', function () {
             map.delete(userId);
         });
+
+        ws.on('pong', heartBeat)
     });
+
+    const heartBeat = () => {
+        this.isAlive = true
+    }
+
+    const noop = () => { }
+    // const interval = setInterval(function ping() {
+    //     console.log('pinging')
+    //     wss.clients.forEach(function each(ws) {
+    //         if (ws.isAlive === false) return ws.terminate();
+
+    //         ws.isAlive = false;
+    //         ws.ping(noop);
+    //     });
+    // }, 5000);
+
+    wss.on('close', () => {
+        clearInterval(interval)
+    })
 
 }
