@@ -8,7 +8,12 @@
       :class="position == 'right' ? 'message__right--bg' : 'message__left--bg'"
     >
       <div class="message__text">
-        {{ message }}
+        <div v-if="username" class="message__username">
+          <span>{{ username }}</span>
+        </div>
+        <div class="message__text--left">
+          {{ message }}
+        </div>
       </div>
       <div class="message__time">
         <span>{{ time }}</span>
@@ -31,6 +36,10 @@ export default {
     position: {
       type: String,
       default: "right",
+    },
+    username: {
+      type: String,
+      default: null,
     },
   },
 };
@@ -57,10 +66,20 @@ export default {
 }
 .message__time {
   padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
 }
 .message__time > span {
   font-size: 12px;
   color: grey;
+}
+.message__username{
+  padding-bottom: 10px;
+}
+.message__username > span {
+  font-size: 14px;
+  color: green;
 }
 
 .message__left {

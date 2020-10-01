@@ -6,6 +6,7 @@
       :message="message.message"
       :time="message.time"
       :position="message.position"
+      :username="message.username"
     ></chat-message>
   </div>
 </template>
